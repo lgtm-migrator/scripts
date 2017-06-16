@@ -9,6 +9,7 @@
 # Last modified 2016-08-20 - Changing to copy to a dedicated Backups folder on all drives; sending to sysadmin@injabie3.tk
 # Last modified 2016-12-03 - Modified msg computers, added subfolders to keep weekly backup checkpoints. Will manually delete old backups. Modified email subject.
 # Last modified 2017-05-27 - Modified script to upload to GitHub, removing passwords and names.
+# Last modified 2017-06-16 - Use computer environment variable instead of hardcoding name.
 
 # Change these values
 $BackupDate = Get-Date -format "yyyy-MM-dd"
@@ -21,7 +22,8 @@ $LogfileAppend = "G:\Logs\EFSCopy.txt"
 $EmailFrom = "no-reply@injabie3.tk"
 $EmailTo = "sysadmin@injabie3.tk"
 
-$EmailSubject = "Lui-HyperV: Weekly Backup Log - EFS: $BackupDate"
+$ComputerName = (Get-CIMInstance CIM_ComputerSystem).Name
+$EmailSubject = "${ComputerName}: Weekly Backup Log - EFS: $BackupDate"
 $Username = "no-reply@injabie3.tk"
 $Password = "<password here>"
 
