@@ -1,0 +1,39 @@
+{
+	"webhook" : "your webhook URL here.",
+	"checkInterval" : 60,
+	"messages" : {
+		"powerOutage" : {
+			"username" : "Windows UPS Alert",
+			"avatar_url" : "",
+			"embeds" : [
+				{
+					"color" : 0,
+					"title" : "Power Outage Alert!",
+					"description" : "The server is currently running on battery power!"
+				}
+			]
+		},
+		"batteryLow" : {
+			"username" : "Windows UPS Alert",
+			"avatar_url" : "",
+			"embeds" : [
+				{
+					"color" : 0,
+					"title" : "Battery Low!",
+					"description" : "The server is low on battery!  Shutdown will commence soon!"
+				}
+			]
+		},
+		"powerOutageRecovery" : {
+			"username" : "Windows UPS Alert",
+			"avatar_url" : "",
+			"embeds" : [
+				{
+					"color" : 0,
+					"title" : "Power Online!",
+					"description" : "The server is now receiving AC power"
+				}
+			]
+		}
+	}
+}
