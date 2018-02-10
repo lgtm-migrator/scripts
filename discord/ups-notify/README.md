@@ -10,3 +10,6 @@ This script checks your uninterruptable power supply (UPS) and sends a Discord w
 - Modify the embed alert texts in `Discord-Battery.ps1`.
 - Run the script.
 If you decide to run the script using Task Scheduler, remember to disable the automatic termination of the script.
+
+## Screenshot
+![Discord Screenshot](screenshot.jpg)
