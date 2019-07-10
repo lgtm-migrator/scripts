@@ -8,6 +8,7 @@ used with a Raspberry Pi 3 B+ or similar.
 ## Requirements
 - OpenCV 3.3.0 or greater.
 - Python 3.5.3 or greater.
+- numpy.
 - gphoto2.
 
 ## Usage
