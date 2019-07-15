@@ -14,7 +14,6 @@ import requests
 import subprocess
 import sys
 import cv2
-import numpy as np
 
 FONT = cv2.FONT_HERSHEY_SIMPLEX
 FONT_SCALE = 0.6
@@ -86,9 +85,8 @@ async def dslr(logger: logging.Logger):
     while True:
         currTime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         filename = "dslr/cam-{}.jpg".format(currTime)
-        test = subprocess.run(["gphoto2",
-                               "--capture-image-and-download",
-                               "--filename={}".format(filename)])
+        subprocess.run(["gphoto2", "--capture-image-and-download",
+                        "--filename={}".format(filename)])
         batteryStatus = subprocess.Popen(("gphoto2", "--get-config=/main/status/batterylevel"),
                                          stdout=subprocess.PIPE)
         batteryStatus = subprocess.Popen(("grep", "Current:"), stdin=batteryStatus.stdout,
@@ -105,16 +103,16 @@ async def dslr(logger: logging.Logger):
                 EMBED["embeds"][0]["description"] = (":warning: The DSLR battery is running "
                                                      "low, at 25%!")
                 EMBED["embeds"][0]["footer"]["text"] = "Autocapture | {}".format(timestampText)
-                response = requests.post(WEBHOOK, data=json.dumps(EMBED),
-                                         headers={'Content-Type': 'application/json'})
+                requests.post(WEBHOOK, data=json.dumps(EMBED),
+                              headers={'Content-Type': 'application/json'})
                 sentAlert25 = True
             elif str(batteryStatus) == "Low\n" and not sentAlertLow:
                 EMBED["embeds"][0]["description"] = (":warning: The DSLR battery is extremely "
                                                      "low!! Please replace the battery "
                                                      "immediately!")
                 EMBED["embeds"][0]["footer"]["text"] = "Autocapture | {}".format(timestampText)
-                response = requests.post(WEBHOOK, data=json.dumps(EMBED),
-                                         headers={'Content-Type': 'application/json'})
+                requests.post(WEBHOOK, data=json.dumps(EMBED),
+                              headers={'Content-Type': 'application/json'})
                 sentAlertLow = True
             elif batteryStatus == "50" or batteryStatus == "100":
                 sentAlert25 = False
@@ -156,8 +154,8 @@ if __name__ == "__main__":
     EMBED["embeds"][0]["description"] = (":information_source: The DSLR autocapture script "
                                          "has started.")
     EMBED["embeds"][0]["footer"]["text"] = "Autocapture | {}".format(timestampText)
-    response = requests.post(WEBHOOK, data=json.dumps(EMBED),
-                             headers={'Content-Type': 'application/json'})
+    requests.post(WEBHOOK, data=json.dumps(EMBED),
+                  headers={'Content-Type': 'application/json'})
     logger = setupLogger()
     loop = asyncio.get_event_loop()
     #loop.create_task(capture(logger, 0, "cam1", title="Camera 1"))
