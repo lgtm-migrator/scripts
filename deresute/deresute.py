@@ -15,6 +15,7 @@ import logging
 import os
 
 import matplotlib
+matplotlib.use("Agg") # Headless server
 import matplotlib.pyplot as plt
 import numpy as np
 
