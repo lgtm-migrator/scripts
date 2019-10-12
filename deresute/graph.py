@@ -57,6 +57,7 @@ if __name__ == "__main__":
                                      
     data = deresute.DeresuteData(args.inputPath)
     data.readData()
-    data.saveGraph("level", "Level", "graph_levels.png")
-    data.saveGraph("prp", "PRP", "graph_prp.png")
-    data.saveGraph("fan", "Fans", "graph_fans.png")
+    outputPath = os.path.abspath(args.outputPath)
+    data.saveGraph("level", "Level", "{}/graph_levels.png".format(outputPath))
+    data.saveGraph("prp", "PRP", "{}/graph_prp.png".format(outputPath))
+    data.saveGraph("fan", "Fans", "{}/graph_fans.png".format(outputPath))
