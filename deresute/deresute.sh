@@ -9,34 +9,27 @@
 # 
 currentDate=`date +"%F_%H-%M-%S"`
 
-injabie3Profile="<ID here>"
-injabie3ProfilePrivate="<private ID from deresute.me"
-friendProfile="<ID here>"
-friendProfilePrivate="<private ID from deresute.me"
-
-privateDownload=($injabie3ProfilePrivate $friendProfilePrivate) # Obscured IDs
-fullDownload=($injabie3Profile $friendProfile) # Full IDs
+# Grab user key/value pairs: key ID, private ID value
+source deresute-users.sh
 
 path="$HOME/scripts/deresute"
 pubPath="/var/www/prod/deresute"
 
 # Full download of images and JSON
 [ ! -d $path ] && mkdir $path 
-for dl in ${fullDownload[*]}
+for id in ${!DERESUTE_PROFILE[@]}
 do
-    [ ! -d $path/$dl ] && mkdir $path/$dl
-    [ ! -d $path/$dl/json ] && mkdir $path/$dl/json
-    wget -O "$path/$dl/$dl-$currentDate.png" https://deresute.me/$dl/huge
-    wget -O "$path/$dl/json/$dl-$currentDate.json" https://deresute.me/$dl/json
+    [ ! -d $path/$id ] && mkdir $path/$id
+    wget -O "$path/$id/$id-$currentDate.png" https://deresute.me/$id/huge
 done
 
 # These downloads will have IDs hidden, and images published on the www
-for dl in ${privateDownload[*]}
+for privateId in ${DERESUTE_PROFILE[@]}
 do
-    [ ! -d $path/$dl ] && mkdir $path/$dl
-    wget -O "$path/$dl/$dl-$currentDate.png" https://deresute.me/$dl/huge
+    [ ! -d $path/$privateId ] && mkdir $path/$privateId
+    wget -O "$path/$privateId/$privateId-$currentDate.png" https://deresute.me/$privateId/huge
     [ ! -d $pubPath ] && mkdir $pubPath
-    [ ! -d $pubPath/$dl ] && mkdir $pubPath/$dl
-    cp "$path/$dl/$dl-$currentDate.png" $pubPath/$dl/
+    [ ! -d $pubPath/$privateId ] && mkdir $pubPath/$privateId
+    cp "$path/$privateId/$privateId-$currentDate.png" $pubPath/$privateId/
 done
 

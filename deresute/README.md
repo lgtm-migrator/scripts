@@ -7,7 +7,8 @@ intervals.
 
 ## Usage
 1. Download script.
-2. Modify IDs and private IDs to match your in-game ID.
+2. Add `deresute-users.sh` with an `DERESUTE_PROFILE` associative array. Key
+   should be 9 digit ID, value should be private ID in deresute.me.
 3. Modify download locations as you see fit.
 4. Run the script.
 5. Optionally, add the script to your crontab.
