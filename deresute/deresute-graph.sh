@@ -9,11 +9,11 @@
 # 
 currentDate=`date +"%F_%H-%M-%S"`
 
-# Grab user key/value pairs: key ID, private ID value
-source deresute-users.sh
-
 path="$HOME/scripts/deresute"
 pubPath="/var/www/prod/deresute"
+
+# Grab user key/value pairs: key ID, private ID value
+source $path/deresute-users.sh
 
 cd $HOME/scripts/deresute/
 # source ../bin/activate
