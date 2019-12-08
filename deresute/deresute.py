@@ -89,7 +89,7 @@ class DeresuteData():
         self.logger.info("Saving graph of key %s to %s", key, outFile)
         plt.figure(figsize=(20, 10))
         plt.grid(b=True, which="both")
-        plt.plot_date(self.data[KEY_TIMESTAMP], self.data[key])
+        plt.plot_date(self.data[KEY_TIMESTAMP], self.data[key], ".", markersize=1)
         plt.xlabel("Date")
         plt.ylabel(ylabel)
         plt.gcf().autofmt_xdate()
