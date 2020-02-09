@@ -9,11 +9,12 @@
 # 
 currentDate=`date +"%F_%H-%M-%S"`
 
-path="$HOME/scripts/deresute"
+path="$HOME/scripts/deresute/data"
+scriptPath="$HOME/scripts/deresute"
 pubPath="/var/www/prod/deresute"
 
 # Grab user key/value pairs: key ID, private ID value
-source $path/deresute-users.sh
+source $scriptPath/deresute-users.sh
 
 cd $HOME/scripts/deresute/
 # source ../bin/activate
@@ -22,7 +23,7 @@ cd $HOME/scripts/deresute/
 [ ! -d $path ] && mkdir $path 
 for key in ${!DERESUTE_PROFILE[@]}
 do
-    ./graph.py "${key}/json" "$pubPath/${DERESUTE_PROFILE[${key}]}" &
+    ./graph.py "$path/${key}/json" "$pubPath/${DERESUTE_PROFILE[${key}]}" &
 done
 
 wait

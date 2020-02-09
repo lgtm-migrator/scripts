@@ -9,11 +9,12 @@
 # 
 currentDate=`date +"%F_%H-%M-%S"`
 
-path="$HOME/scripts/deresute"
+path="$HOME/scripts/deresute/data"
+scriptPath="$HOME/scripts/deresute"
 pubPath="/var/www/prod/deresute"
 
 # Grab user key/value pairs: key ID, private ID value
-source $path/deresute-users.sh
+source $scriptPath/deresute-users.sh
 
 # Full download of images and JSON
 [ ! -d $path ] && mkdir $path 
