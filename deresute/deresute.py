@@ -73,6 +73,8 @@ class DeresuteData():
             self.data[KEY_TIMESTAMP].append(timestamp)
             for key in ROW_GRAPHS:
                 self.data[key].append(content[key])
+
+        self.logger.info("Finished reading data from %s", self.path)
             
     def saveGraph(self, key: str, ylabel: str, outFile: str):
         """Save a simple graph, REQUIRES TIMESTAMP

@@ -49,10 +49,10 @@ if __name__ == "__main__":
                         "graphs should be outputted.")
     args = parser.parse_args()
     if not os.path.isdir(args.inputPath):
-        print("This is not a valid input data path!")
+        print("\"{}\" is not a valid input data path!".format(args.inputPath))
         exit()
     elif not os.path.isdir(args.outputPath):
-        print("This is not a valid output data path!")
+        print("\"{}\" is not a valid output data path!".format(args.outputPath))
         exit()
                                      
     data = deresute.DeresuteData(args.inputPath)
