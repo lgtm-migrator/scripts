@@ -14,7 +14,7 @@ scriptPath="$HOME/scripts/deresute"
 pubPath="/var/www/prod/deresute"
 
 # Grab user key/value pairs: key ID, private ID value
-source $scriptPath/deresute-users.sh
+source $scriptPath/deresute-config.sh
 
 cd $HOME/scripts/deresute/
 # source ../bin/activate
