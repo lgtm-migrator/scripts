@@ -15,10 +15,10 @@ source $scriptPath/deresute-config.sh
 cd $scriptPath
 
 # Graph, go!
-[ ! -d $PATH ] && mkdir $PATH
+[ ! -d $DATA_PATH ] && mkdir $DATA_PATH
 for key in ${!DERESUTE_PROFILE[@]}
 do
-    ./graph.py "$PATH/${key}/json" "$PUB_PATH/${DERESUTE_PROFILE[${key}]}" &
+    ./graph.py "$DATA_PATH/${key}/json" "$PUB_PATH/${DERESUTE_PROFILE[${key}]}" &
 done
 
 wait

@@ -7,7 +7,7 @@
 # deresute.me Image Archiver
 # Script config file.
 # 
-PATH="/path/to/data"
+DATA_PATH="/path/to/data"
 PUB_PATH="/path/to/public/storage"
 
 declare -A DERESUTE_PROFILE
