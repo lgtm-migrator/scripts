@@ -8,19 +8,16 @@
 # Archive info from game.
 # 
 currentDate=`date +"%F_%H-%M-%S"`
-
-path="$HOME/scripts/deresute/data"
 scriptPath="$HOME/scripts/deresute"
-pubPath="/var/www/prod/deresute"
 
 # Grab user key/value pairs: key ID, private ID value
 source $scriptPath/deresute-config.sh
 
 # Full download of images and JSON
-[ ! -d $path ] && mkdir $path 
+[ ! -d $PATH ] && mkdir $PATH
 for dl in ${!DERESUTE_PROFILE[@]}
 do
-    [ ! -d $path/$dl ] && mkdir $path/$dl
-    [ ! -d $path/$dl/json ] && mkdir $path/$dl/json
-    wget -O "$path/$dl/json/$dl-$currentDate.json" https://deresute.me/$dl/json
+    [ ! -d $PATH/$dl ] && mkdir $PATH/$dl
+    [ ! -d $PATH/$dl/json ] && mkdir $PATH/$dl/json
+    wget -O "$PATH/$dl/json/$dl-$currentDate.json" https://deresute.me/$dl/json
 done

@@ -7,23 +7,18 @@
 # deresute.me Image Archiver
 # Archive info from game.
 # 
-currentDate=`date +"%F_%H-%M-%S"`
-
-path="$HOME/scripts/deresute/data"
 scriptPath="$HOME/scripts/deresute"
-pubPath="/var/www/prod/deresute"
 
 # Grab user key/value pairs: key ID, private ID value
 source $scriptPath/deresute-config.sh
 
-cd $HOME/scripts/deresute/
-# source ../bin/activate
+cd $scriptPath
 
 # Graph, go!
-[ ! -d $path ] && mkdir $path 
+[ ! -d $PATH ] && mkdir $PATH
 for key in ${!DERESUTE_PROFILE[@]}
 do
-    ./graph.py "$path/${key}/json" "$pubPath/${DERESUTE_PROFILE[${key}]}" &
+    ./graph.py "$PATH/${key}/json" "$PUB_PATH/${DERESUTE_PROFILE[${key}]}" &
 done
 
 wait

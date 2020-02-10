@@ -5,8 +5,11 @@
 # Description:
 # iDOLM@STER Cinderella Girls Starlight Stage
 # deresute.me Image Archiver
-# User ID to private ID mapping file.
+# Script config file.
 # 
+PATH="/path/to/data"
+PUB_PATH="/path/to/public/storage"
+
 declare -A DERESUTE_PROFILE
 DERESUTE_PROFILE[123456789]=YourPrivateIdHere
 DERESUTE_PROFILE[987654321]=AnotherPrivateIdHere
