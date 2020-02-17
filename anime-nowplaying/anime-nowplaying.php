@@ -1,16 +1,14 @@
 <html>
 <head>
 <title>
-MyAnimeList PHP Updater v1.2 - Generic Updater Script by Injabie3
+MyAnimeList PHP Updater v1.3 - Generic Updater Script by Injabie3
 </title>
 </head>
 <body>
-<b>MyAnimeList PHP Updater v1.2 - Generic Updater Script by Injabie3</b>
+<b>MyAnimeList PHP Updater v1.3 - Generic Updater Script by Injabie3</b>
 <br />
 <br />
 Usage: Use MalUpdater to send updates to this page.<br />
-Last Modified: 2016-12-27 - Migrated from mysql to mysqli.
-Last Modified: 2017-02-05 - Fixed "" around mal index.
 <br />
 <br />
 <b>Status (Main):</b>
