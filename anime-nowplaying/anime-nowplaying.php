@@ -8,7 +8,7 @@ MyAnimeList PHP Updater v1.3 - Generic Updater Script by Injabie3
 <b>MyAnimeList PHP Updater v1.3 - Generic Updater Script by Injabie3</b>
 <br />
 <br />
-Usage: Use MalUpdater to send updates to this page.<br />
+Usage: Use MalUpdater or Plex to send updates to this page.<br />
 <br />
 <br />
 <b>Status (Main):</b>
@@ -21,14 +21,46 @@ $con = new mysqli("$host", "$username", "$password") or die("Cannot connect (Mai
 $con->select_db("$dbName") or die(mysqli_error());
 $con->query("SET NAMES 'utf8'");
 
-// Get data from MAL Updater 
-$user = $_POST['user'];
-$animeID = $_POST['animeID'];
-$name = $_POST['name'];
-$ep = $_POST['ep'];
-$eptotal = $_POST['eptotal'];
-$picurl = $_POST['picurl'];
+// Get data passed to the script
+$updateMode = $_GET["updateMode"];
 $code = $_GET['code'];
+
+// Declare variables outside.
+$animeID = "";
+$ep = 0;
+$eptotal = 0;
+$name = "";
+$picurl = "";
+$user = "";
+
+$isPlex = $updateMode == "plex";
+$isMAL = $updateMode == "malupdater";
+if ($isPlex) {
+    echo "(Plex updater) ";
+    // Get the POST payload.
+    $data = json_decode(implode('', $_POST));
+
+    $animeID = 0;
+    $ep = $data->Metadata->index;
+    $eptotal = 0;
+    $isVideo = in_array($data->Metadata->type, [ "movie", "episode" ]);
+    $name = $data->Metadata->grandparentTitle;
+    $picurl = "N/A";
+    $user = $data->Account->title;
+} elseif ($isMAL) {
+    echo "(MAL updater) ";
+    $animeID = $_POST['animeID'];
+    $ep = $_POST['ep'];
+    $eptotal = $_POST['eptotal'];
+    $name = $_POST['name'];
+    $picurl = $_POST['picurl'];
+    $user = $_POST['user'];
+} else {
+    // We shouldn't be here. Take care of this later.
+    echo "Unknown updater!";
+    $con->close();
+    exit();
+}
 
 
 $sqlTest  = <<<SQL
@@ -64,6 +96,11 @@ while ($infoMAL = $dataMAL->fetch_array()) {
         }
     } elseif ($code != $usercode ) {
         echo "Error: Incorrect code. Please try again.";
+    } elseif ($isPlex && (!($data->event == "media.play" || $data->event == "media.resume")
+                          || !$isVideo)) {
+        echo "Not a media.play event, skipping.";
+    } elseif ($isPlex && ($data->user != True || $data->owner != True)) {
+        echo "Error: You are not the owner!";
     } elseif ($user == "") {
         echo "Error: Please send data using MalUpdater!";
     } elseif ($name == "") {
