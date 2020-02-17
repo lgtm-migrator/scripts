@@ -16,13 +16,7 @@ Last Modified: 2017-02-05 - Fixed "" around mal index.
 <b>Status (Main):</b>
 <?php
 
-//Configure the following for your database.
-$host="localhost"; // Host name 
-$username="USERNAME"; // Mysql username 
-$password="PASSWORD"; // Mysql password 
-$dbName="DATABASE"; // Database name
-$tableName="TABLE"; // Table name
-$usercode="USERCODE"; // User code, to prevent unauthorized updates.
+include_once( "anime-nowplaying-config.php" );
 
 // Connect to server and select database.
 $con = new mysqli("$host", "$username", "$password")or die("Cannot connect (Main)"); 
