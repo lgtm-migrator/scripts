@@ -43,54 +43,54 @@ $code=$_GET['code'];
 $data_mal=$con->query("SELECT * FROM  `$tbl_name` ORDER BY  `timestamp` DESC LIMIT 0 , 1") or die(mysqli_error());
 while($info_mal = $data_mal->fetch_array())
 {
-	if (isset($_GET['mal']) && $_GET['mal'] == "test")
-	{	
-		$sql="INSERT INTO $tbl_name (`ID` ,`timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'Test', '0', 'Database Test', '0', '0', '');";
-		$result = $con->query($sql);
-		// if successfully insert data into database, displays message "Successful". 
-		if($result)
-		{
-			echo "OK: Test update successful!";
-			echo "<br>";
-			echo "<a href='index.php'>Back to main page</a>";
-		}
-		else
-		{
-			echo mysqli_error();
-		}
-	}
-	elseif ($code != $usercode )
-	{
-		echo "Error: Incorrect code. Please try again.";
-	}
-	elseif ($user == "")
-	{
-		echo "Error: Please send data using MalUpdater!";
-	}
-	elseif ($name == "")
-	{	
-		echo "OK: Not playing anything, so no new information.  Not updating database.";
-	}
-	elseif ($name == $info_mal['name'] & $ep == $info_mal['ep'])
-	{
-		echo "OK: Same information as last update.  Not updating database.";
-	}
-	else
-	{	
-		$sql="INSERT INTO $tbl_name (`ID` ,`timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'$user', '$animeID', '$name', '$ep', '$eptotal', '$picurl');";
-		$result = $con->query($sql);
-		// if successfully insert data into database, displays message "Successful". 
-		if($result)
-		{
-			echo "OK: Update posted successfully";
-			echo "<br>";
-			echo "<a href='index.php'>Back to main page</a>";
-		}
-		else
-		{
-			echo mysqli_error();
-		}
-	}
+    if (isset($_GET['mal']) && $_GET['mal'] == "test")
+    {
+        $sql="INSERT INTO $tbl_name (`ID` ,`timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'Test', '0', 'Database Test', '0', '0', '');";
+        $result = $con->query($sql);
+        // if successfully insert data into database, displays message "Successful".
+        if($result)
+        {
+            echo "OK: Test update successful!";
+            echo "<br>";
+            echo "<a href='index.php'>Back to main page</a>";
+        }
+        else
+        {
+            echo mysqli_error();
+        }
+    }
+    elseif ($code != $usercode )
+    {
+        echo "Error: Incorrect code. Please try again.";
+    }
+    elseif ($user == "")
+    {
+        echo "Error: Please send data using MalUpdater!";
+    }
+    elseif ($name == "")
+    {
+        echo "OK: Not playing anything, so no new information.  Not updating database.";
+    }
+    elseif ($name == $info_mal['name'] & $ep == $info_mal['ep'])
+    {
+        echo "OK: Same information as last update.  Not updating database.";
+    }
+    else
+    {
+        $sql="INSERT INTO $tbl_name (`ID` ,`timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'$user', '$animeID', '$name', '$ep', '$eptotal', '$picurl');";
+        $result = $con->query($sql);
+        // if successfully insert data into database, displays message "Successful"
+        if($result)
+        {
+            echo "OK: Update posted successfully";
+            echo "<br>";
+            echo "<a href='index.php'>Back to main page</a>";
+        }
+        else
+        {
+            echo mysqli_error();
+        }
+    }
 }
  
 // close connection 
