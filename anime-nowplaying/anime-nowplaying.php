@@ -17,8 +17,8 @@ Usage: Use MalUpdater or Plex to send updates to this page.<br />
 include_once( "anime-nowplaying-config.php" );
 
 // Connect to server and select database.
-$con = new mysqli("$host", "$username", "$password") or die("Cannot connect (Main)");
-$con->select_db("$dbName") or die(mysqli_error());
+$con = new mysqli("$HOST", "$USERNAME", "$PASSWORD") or die("Cannot connect (Main)");
+$con->select_db("$DB_NAME") or die(mysqli_error());
 $con->query("SET NAMES 'utf8'");
 
 // Get data passed to the script
@@ -64,21 +64,21 @@ if ($isPlex) {
 
 
 $sqlTest  = <<<SQL
-INSERT INTO $tableName
+INSERT INTO $TABLE_NAME
 (`ID`, `timestamp`, `user`, `animeID`, `name` ,`ep` ,`eptotal`,`picurl`)
 VALUES
 (NULL, CURRENT_TIMESTAMP, 'Test', '0', 'Database Test', '0', '0', '');
 SQL;
 
 $sqlInsert = <<<SQL
-INSERT INTO $tableName
+INSERT INTO $TABLE_NAME
 (`ID`, `timestamp`, `user`, `animeID`, `name` ,`ep` ,`eptotal`,`picurl`)
 VALUES
 (NULL, CURRENT_TIMESTAMP, '$user', '$animeID', '$name', '$ep', '$eptotal', '$picurl');
 SQL;
 
 $sqlGetData = <<<SQL
-SELECT * FROM `$tableName`
+SELECT * FROM `$TABLE_NAME`
 ORDER BY `timestamp`
 DESC LIMIT 0, 1;
 SQL;
@@ -94,7 +94,7 @@ while ($infoMAL = $dataMAL->fetch_array()) {
         } else {
             echo mysqli_error();
         }
-    } elseif ($code != $usercode ) {
+    } elseif ($code != $USERCODE ) {
         echo "Error: Incorrect code. Please try again.";
     } elseif ($isPlex && (!($data->event == "media.play" || $data->event == "media.resume")
                           || !$isVideo)) {

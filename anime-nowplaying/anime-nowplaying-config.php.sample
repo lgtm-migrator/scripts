@@ -1,10 +1,10 @@
 <?php
 // Configure the following for your database.
-$host="localhost";
-$usercode="USERCODE";
+$HOST="localhost";
+$USERCODE="USERCODE";
 
 // MySQL credentials
-$username="USERNAME";
-$password="PASSWORD";
-$dbName="DATABASE";
-$tableName="TABLE";
+$USERNAME="USERNAME";
+$PASSWORD="PASSWORD";
+$DB_NAME="DATABASE";
+$TABLE_NAME="TABLE";
