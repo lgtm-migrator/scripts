@@ -20,13 +20,13 @@ Last Modified: 2017-02-05 - Fixed "" around mal index.
 $host="localhost"; // Host name 
 $username="USERNAME"; // Mysql username 
 $password="PASSWORD"; // Mysql password 
-$db_name="DATABASE"; // Database name 
-$tbl_name="TABLE"; // Table name 
+$dbName="DATABASE"; // Database name
+$tableName="TABLE"; // Table name
 $usercode="USERCODE"; // User code, to prevent unauthorized updates.
 
 // Connect to server and select database.
 $con = new mysqli("$host", "$username", "$password")or die("Cannot connect (Main)"); 
-$con->select_db("$db_name")or die(mysqli_error());
+$con->select_db("$dbName")or die(mysqli_error());
 $con->query("SET NAMES 'utf8'");
 
 // Get data from MAL Updater 
@@ -40,12 +40,12 @@ $code=$_GET['code'];
 
 
 // Insert data into mysql
-$data_mal=$con->query("SELECT * FROM  `$tbl_name` ORDER BY  `timestamp` DESC LIMIT 0 , 1") or die(mysqli_error());
+$data_mal=$con->query("SELECT * FROM  `$tableName` ORDER BY  `timestamp` DESC LIMIT 0 , 1") or die(mysqli_error());
 while($info_mal = $data_mal->fetch_array())
 {
     if (isset($_GET['mal']) && $_GET['mal'] == "test")
     {
-        $sql="INSERT INTO $tbl_name (`ID` ,`timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'Test', '0', 'Database Test', '0', '0', '');";
+        $sql="INSERT INTO $tableName (`ID` ,`timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'Test', '0', 'Database Test', '0', '0', '');";
         $result = $con->query($sql);
         // if successfully insert data into database, displays message "Successful".
         if($result)
@@ -77,7 +77,8 @@ while($info_mal = $data_mal->fetch_array())
     }
     else
     {
-        $sql="INSERT INTO $tbl_name (`ID` ,`timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'$user', '$animeID', '$name', '$ep', '$eptotal', '$picurl');";
+        $sql="INSERT INTO $tableName (`ID`,
+                    `timestamp` ,`user` ,`animeID` ,`name` ,`ep` ,`eptotal` ,`picurl`) VALUES (NULL ,CURRENT_TIMESTAMP ,'$user', '$animeID', '$name', '$ep', '$eptotal', '$picurl');";
         $result = $con->query($sql);
         // if successfully insert data into database, displays message "Successful"
         if($result)
