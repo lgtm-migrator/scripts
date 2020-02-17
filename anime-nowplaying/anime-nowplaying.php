@@ -61,8 +61,6 @@ while ($infoMAL = $dataMAL->fetch_array()) {
         $result = $con->query($sqlTest);
         if ($result) {
             echo "OK: Test update successful!";
-            echo "<br>";
-            echo "<a href='index.php'>Back to main page</a>";
         } else {
             echo mysqli_error();
         }
@@ -71,15 +69,13 @@ while ($infoMAL = $dataMAL->fetch_array()) {
     } elseif ($user == "") {
         echo "Error: Please send data using MalUpdater!";
     } elseif ($name == "") {
-        echo "OK: Not playing anything, so no new information.  Not updating database.";
+        echo "OK: Not playing anything, so no new information.Not updating database.";
     } elseif ($name == $infoMAL['name'] & $ep == $infoMAL['ep']) {
-        echo "OK: Same information as last update.  Not updating database.";
+        echo "OK: Same information as last update. Not updating database.";
     } else {
         $result = $con->query($sqlInsert);
         if ($result) {
             echo "OK: Update posted successfully";
-            echo "<br>";
-            echo "<a href='index.php'>Back to main page</a>";
         } else {
             echo mysqli_error();
         }
