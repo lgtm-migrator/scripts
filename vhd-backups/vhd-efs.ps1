@@ -6,6 +6,9 @@
 # Created by Michel Stevelmans - http://www.michelstevelmans.com
 # Modified by Injabie3 - https://injabie3.moe
 
+# Include the Discord helpers
+."D:\Scripts\Helpers\Discord-Webhook.ps1"
+
 # Change these values
 $BackupDate = Get-Date -format "yyyy-MM-dd"
 $SourceFolder = "G:\EFS"
@@ -22,15 +25,10 @@ $EmailSubject = "${ComputerName}: Weekly Backup Log - EFS: $BackupDate"
 $Username = "no-reply@injabie3.tk"
 $Password = "<password here>"
 
-#Send a message to domain computers to warn about virtual hard drives being dismounted.
-start msg.exe "* /server:PC-name ""The server will be dismounting its drives for backup in 15 minutes. Please save your work and logoff to avoid data loss."""
-TIMEOUT 600
-start msg.exe "* /server:PC-name ""The server will be dismounting its drives for backup in 5 minutes. Please save your work and logoff now to avoid data loss."""
-TIMEOUT 300
-start msg.exe "* /server:PC-name ""The server has dismounted its drives. Please wait until the backup is complete before logging back on."""
+Discord-PostWebhook -title "Monthly Backups" -message ":information_source: The scheduled VHD monthly backups have started. Dismounting VHDs..."
 
 #Dismount the VHDs
-.\VHD-Dismount.ps1
+."D:\Scripts\VHD-Dismount.ps1"
 
 # Copy Folder with Robocopy
 Robocopy $SourceFolder $DestinationFolder1 /E /ZB /R:10 /W:30 /LOG:$Logfile /TEE /NP
@@ -38,9 +36,7 @@ Robocopy $SourceFolder $DestinationFolder2 /E /ZB /R:10 /W:30 /LOG+:$Logfile /TE
 Robocopy $SourceFolder $DestinationFolder3 /E /ZB /R:10 /W:30 /LOG+:$Logfile /TEE /NP
 
 #Mount the VHDs again
-.\VHD-Mount.ps1
-
-start msg.exe "* /server:PC-name ""The server has mounted its drives. You may now log in again."""
+."D:\Scripts\VHD-Mount.ps1"
 
 #Prep the email to be sent.
 $LogfileContents = Get-Content $Logfile | Out-String
@@ -56,3 +52,5 @@ $SMTPClient = New-Object Net.Mail.SmtpClient("smtp.gmail.com", 587)
 $SMTPClient.EnableSsl = $true
 $SMTPClient.Credentials = New-Object System.Net.NetworkCredential($Username, $Password);
 $SMTPClient.Send($Message)
+
+Discord-PostWebhook -title "Monthly Backups" -message ":information_source: VHD backups are now complete. The status report was sent to `sysadmin@injabie3.tk`."
