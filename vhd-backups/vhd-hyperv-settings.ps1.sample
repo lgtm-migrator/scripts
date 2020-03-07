@@ -1,4 +1,10 @@
-﻿$BackupDate = Get-Date -format "yyyy-MM-dd"
+﻿# 2020-03-07
+# Injabie3
+#
+# Description:
+# VHD backup settings file
+
+$BackupDate = Get-Date -format "yyyy-MM-dd"
 
 # Backup source
 $SourceFolder = "C:\Your\Path\Here"

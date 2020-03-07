@@ -1,15 +1,10 @@
+# 2016-01-09
+# Injabie3
+#
+# Description:
 # PowerShell Robocopy script with e-mail notification
 # Created by Michel Stevelmans - http://www.michelstevelmans.com
-# Modified by Injabie3 - https://injabie3.tk
-# Last modified 2016-01-09
-# Last modified 2016-02-07
-# Last modified 2016-02-13
-# Last modified 2016-05-01 - RAID config added, drive letters changed. Added weekly backup to 2 external drives + NAS.
-# Last modified 2016-07-01 - Sending to injabie3.tk domain.
-# Last modified 2016-08-20 - Changing to copy to a dedicated Backups folder on all drives; sending to sysadmin@injabie3.tk
-# Last modified 2016-12-03 - Modified msg computers, added subfolders to keep weekly backup checkpoints. Will manually delete old backups. Modified email subject.
-# Last modified 2017-05-27 - Modified script to upload to GitHub, removing passwords and names.
-# Last modified 2017-06-16 - Use computer environment variable instead of hardcoding name.
+# Modified by Injabie3 - https://injabie3.moe
 
 # Change these values
 $BackupDate = Get-Date -format "yyyy-MM-dd"
