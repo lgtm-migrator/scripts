@@ -1,15 +1,29 @@
 ﻿$BackupDate = Get-Date -format "yyyy-MM-dd"
+
+# Backup source
 $SourceFolder = "C:\Your\Path\Here"
 
-# TODO consolidate into a list
-$DestinationFolder1 = "C:\Your\Path\Here\$BackupDate"
-$DestinationFolder2 = "C:\Your\Path\Here\$BackupDate"
-$DestinationRAID = "C:\Your\Path\Here\$BackupDate"
-$DestinationFileServer = "\\Your\Path\Here\$BackupDate"
+# Backup destinations
+# (Description, Path)
+$DestinationMain = ("Description", "C:\Your\Path\Here\$BackupDate")
+$DestinationsLocal =
+@(("Description", "C:\Your\Path\Here\$BackupDate"),
+  ("Description", "C:\Your\Path\Here\$BackupDate"))
+$DestinationsRemote =
+@(("Description", "\\Your\Path\Here\$BackupDate"),
+  ("Description", "\\Your\Path\Here\$BackupDate"))
+
+# Discord
+$DiscordTitle = "Monthly Backups"
+
 $Logfile = "C:\Your\Path\Here"
 $LogfileAppend = "C:\Your\Path\Here"
 $EmailFrom = "no-reply@injabie3.tk"
 $EmailTo1 = "destination@example.com"
+
+# VMs
+$VMsOn = "VM-Name1","VM Name2"
+$VMsOff = $VMsOn,"VM-Name3"
 
 $ComputerName = (Get-CIMInstance CIM_ComputerSystem).Name
 $EmailSubject = "${ComputerName}: Weekly Backup Log - Hyper-V: $BackupDate"
