@@ -19,7 +19,7 @@ $DiscordTitle = "Monthly Backups"
 $Logfile = "C:\Your\Path\Here"
 $LogfileAppend = "C:\Your\Path\Here"
 $EmailFrom = "no-reply@injabie3.tk"
-$EmailTo1 = "destination@example.com"
+$EmailTo = "destination@example.com"
 
 # VMs
 $VMsOn = "VM-Name1","VM Name2"
