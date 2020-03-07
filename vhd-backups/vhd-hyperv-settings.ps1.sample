@@ -1,0 +1,17 @@
+﻿$BackupDate = Get-Date -format "yyyy-MM-dd"
+$SourceFolder = "C:\Your\Path\Here"
+
+# TODO consolidate into a list
+$DestinationFolder1 = "C:\Your\Path\Here\$BackupDate"
+$DestinationFolder2 = "C:\Your\Path\Here\$BackupDate"
+$DestinationRAID = "C:\Your\Path\Here\$BackupDate"
+$DestinationFileServer = "\\Your\Path\Here\$BackupDate"
+$Logfile = "C:\Your\Path\Here"
+$LogfileAppend = "C:\Your\Path\Here"
+$EmailFrom = "no-reply@injabie3.tk"
+$EmailTo1 = "destination@example.com"
+
+$ComputerName = (Get-CIMInstance CIM_ComputerSystem).Name
+$EmailSubject = "${ComputerName}: Weekly Backup Log - Hyper-V: $BackupDate"
+$Username = "no-reply@injabie3.tk"
+$Password = "your-password-here"
