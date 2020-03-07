@@ -26,6 +26,6 @@ $VMsOn = "VM-Name1","VM Name2"
 $VMsOff = $VMsOn,"VM-Name3"
 
 $ComputerName = (Get-CIMInstance CIM_ComputerSystem).Name
-$EmailSubject = "${ComputerName}: Weekly Backup Log - Hyper-V: $BackupDate"
+$EmailSubject = "${ComputerName} - Hyper-V Backup Log: $BackupDate"
 $Username = "no-reply@injabie3.tk"
 $Password = "your-password-here"
