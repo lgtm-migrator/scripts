@@ -1,0 +1,35 @@
+﻿# 2020-03-07
+# Injabie3
+#
+# Description:
+# VHD backup settings file
+
+$BackupDate = Get-Date -format "yyyy-MM-dd"
+
+# Backup source
+$SourceFolder = "C:\Your\Path\Here"
+
+# Backup destinations
+# (Description, Path)
+$DestinationMain = ("Description", "C:\Your\Path\Here\$BackupDate")
+$DestinationsLocal =
+@(("Description", "C:\Your\Path\Here\$BackupDate"),
+  ("Description", "C:\Your\Path\Here\$BackupDate"))
+$DestinationsRemote =
+@(("Description", "\\Your\Path\Here\$BackupDate"),
+  ("Description", "\\Your\Path\Here\$BackupDate"))
+
+# Discord
+$DiscordTitle = "Monthly Backups"
+
+# Email Settings
+$ComputerName = (Get-CIMInstance CIM_ComputerSystem).Name
+$EmailSubject = "${ComputerName} - EFS Backup Log: $BackupDate"
+$EmailFrom = "no-reply@injabie3.tk"
+$EmailTo = "destination@example.com"
+$Username = "no-reply@injabie3.tk"
+$Password = "your-password-here"
+
+# Log files
+$Logfile = "C:\Your\Path\Here"
+$LogfileAppend = "C:\Your\Path\Here"
