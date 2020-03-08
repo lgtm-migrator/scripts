@@ -30,7 +30,8 @@ $triggeredLow = $false
 $triggeredCritical = $false
 $triggeredFullyCharged = $false
 
-Discord-PostWebhook "Discord Battery Script" ":information_source: The battery checker script has been started."
+Discord-PostWebhook "Discord Battery Script" `
+    ":information_source: The battery checker script has been started."
 
 # Event loop.
 do
@@ -43,21 +44,27 @@ do
     if (($Status -eq 1) -and ($BatteryPercentage -le 35) -and (-not $triggeredLow))
     #Low Battery
     {
-        Discord-PostWebhook "Battery Low" ":warning: :battery: The server has $BatteryPercentage% battery left!  Shutdown will commence soon!"
+        $emojis = ":warning: :battery:"
+        Discord-PostWebhook "Battery Low" `
+            "$emojis The server has $BatteryPercentage% battery left! Shutdown will commence soon!"
         $triggeredLow = $true
         $triggeredFullyCharged = $false
     }
     elseif(($Status -eq 1) -and (-not $triggered))
     # Battery is discharging.
     {
-        Discord-PostWebhook "Power Outage" ":warning: :battery: The server has switched to battery power ($BatteryPercentage% remaining)!"
+        $emojis = ":warning: :battery:"
+        Discord-PostWebhook "Power Outage" `
+            "$emojis The server has switched to battery power ($BatteryPercentage% remaining)!"
         $triggered = $true
         $triggeredFullyCharged = $false
     }
     elseif (($Status -eq 2) -and $triggered)
     # Back on AC.
     {
-        Discord-PostWebhook "Power Online" ":information_source: :electric_plug: The server has switched to AC with $BatteryPercentage% remaining."
+        $emojis = ":information_source: :electric_plug:"
+        Discord-PostWebhook "Power Online" `
+            "$emojis The server has switched to AC with $BatteryPercentage% remaining."
         $triggered = $false
         $triggeredLow = $false
         shutdown /a /m \\LuiP-Miria
@@ -65,7 +72,9 @@ do
     elseif (($Status -eq 2) -and ($BatteryPercentage -eq 100) -and (-not $triggeredFullyCharged))
     # Battery fully charged!
     {
-        Discord-PostWebhook "Battery Recharged" ":information_source: :electric_plug: The battery is now fully charged!"
+        $emojis = ":information_source: :electric_plug:"
+        Discord-PostWebhook "Battery Recharged" `
+            "$emojis The battery is now fully charged!"
         $triggeredFullyCharged = $true
     }
 
