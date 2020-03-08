@@ -61,3 +61,6 @@ if __name__ == "__main__":
     data.saveGraph("level", "Level", "{}/graph_levels.png".format(outputPath))
     data.saveGraph("prp", "PRP", "{}/graph_prp.png".format(outputPath))
     data.saveGraph("fan", "Fans", "{}/graph_fans.png".format(outputPath))
+    data.saveGraph("pro", "Pro Full Combos", "{}/graph_fc_pro.png".format(outputPath))
+    data.saveGraph("master", "Master Full Combos", "{}/graph_fc_mas.png".format(outputPath))
+    data.saveGraph("master_plus", "Master+ Full Combos", "{}/graph_fc_mas+.png".format(outputPath))

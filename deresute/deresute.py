@@ -63,16 +63,18 @@ class DeresuteData():
 
             with open(filename, "r") as fileHandle:
                 content = json.load(fileHandle)
-                row = []
+                row = {}
                 if "error" in content.keys():
                     continue
                 for item in ROW_HEADER:
-                    row.append(content[item])
+                    row[item] = content[item]
+                for item in ROW_HEADER_FC:
+                    row[item] = content[KEY_FC][item]
             
             timestamp = datetime.fromtimestamp(content[KEY_TIMESTAMP])
             self.data[KEY_TIMESTAMP].append(timestamp)
             for key in ROW_GRAPHS:
-                self.data[key].append(content[key])
+                self.data[key].append(row[key])
 
         self.logger.info("Finished reading data from %s", self.path)
             
