@@ -94,4 +94,4 @@ $SMTPClient.Credentials = New-Object `
 $SMTPClient.Send($Message)
 
 Discord-PostWebhook "$($DiscordTitle)" `
-    ":information_source: Backups are complete. The report was sent to `$($EmailTo)`."
+    ":information_source: Backups are complete. The report was sent to $($EmailTo)."
