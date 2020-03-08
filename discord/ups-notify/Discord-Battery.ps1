@@ -1,20 +1,17 @@
-﻿# UPS/Battery Notification for Discord Webhooks.
-# Created by Injabie3 - https://injabie3.moe
-# -------------------
+﻿# 2017-10-04
+# Injabie3 - https://injabie3.moe
+#
 # Description:
+# UPS/Battery Notification for Discord Webhooks.
 #
 # Gets UPS/battery status, and if the server goes on battery, it
 # notifies a webhook with information. This assumes your UPS protects 
 # your internet connection, and that your ISP connection is unaffected
 # by this outage.
-# -------------------
-# Requirements:
+#
 # Make sure your UPS battery is using the Windows default driver.
 # The APC driver that comes with PowerChute does not allow Windows to 
 # access the battery information.
-#
-# Created on 2017-10-04
-# Modified on 2018-02-09 - Use my custom function from Discord-Webhook.ps1.
 
 # Include the function first.
 .".\Discord-Webhook.ps1"

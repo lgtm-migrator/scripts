@@ -1,12 +1,10 @@
-﻿# Discord Webhook Notifer function.
-# Created by Injabie3 - https://injabie3.moe
-# -------------------
+﻿# 2017-10-07
+# Injabie3 - https://injabie3.moe
+#
 # Description:
+# Discord Webhook Notifer function.
 #
 # Function to send payload to a Discord webhook.
-# -------------------
-# Created on 2017-10-07
-# Modified on 2018-02-09
 
 # The function below is modified from:
 # http://techibee.com/powershell/hey-powershell-what-is-my-laptop-battery-status/1037
