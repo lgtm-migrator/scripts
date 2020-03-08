@@ -11,13 +11,13 @@ $SourceFolder = "C:\Your\Path\Here"
 
 # Backup destinations
 # (Description, Path)
+# Comma before first element if you only have one.
 $DestinationMain = ("Description", "C:\Your\Path\Here\$BackupDate")
 $DestinationsLocal =
 @(("Description", "C:\Your\Path\Here\$BackupDate"),
   ("Description", "C:\Your\Path\Here\$BackupDate"))
 $DestinationsRemote =
-@(("Description", "\\Your\Path\Here\$BackupDate"),
-  ("Description", "\\Your\Path\Here\$BackupDate"))
+@(,("Description", "\\Your\Path\Here\$BackupDate"))
 
 # VMs
 $VMsOn = "VM-Name1","VM Name2"
