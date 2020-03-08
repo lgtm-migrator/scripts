@@ -19,6 +19,13 @@ $DestinationsRemote =
 @(("Description", "\\Your\Path\Here\$BackupDate"),
   ("Description", "\\Your\Path\Here\$BackupDate"))
 
+# VHDs
+# (Description, Path)
+$VHDMount =
+@(("Description", "C:\Your\Path\Here\VHD.vhdx"),
+  ("Description", "C:\Your\Path\Here\VHD.vhd"))
+$VHDDismount = $VHDMount
+
 # Discord
 $DiscordTitle = "Monthly Backups"
 
