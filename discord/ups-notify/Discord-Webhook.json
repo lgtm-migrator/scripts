@@ -1,19 +1,19 @@
 {
-	"webhook" : "your webhook URL here.",
-	"message" : {
-		"username" : "Your webhook username here.",
-		"avatar_url" : "",
-		"embeds" : [
-			{
-				"color" : 0,
-				"title" : "Title",
-				"description" : "Message",
-				"footer" : {
-					"text" : "Footer text",
-					"icon_url" : "",
-					"proxy_icon_url" : ""
-				}
-			}
-		]
-	}
+    "webhook" : "your webhook URL here.",
+    "message" : {
+        "username" : "Your webhook username here.",
+        "avatar_url" : "",
+        "embeds" : [
+            {
+                "color" : 0,
+                "title" : "Title",
+                "description" : "Message",
+                "footer" : {
+                    "text" : "Footer text",
+                    "icon_url" : "",
+                    "proxy_icon_url" : ""
+                }
+            }
+        ]
+    }
 }
