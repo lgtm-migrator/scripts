@@ -19,19 +19,21 @@ $DestinationsRemote =
 @(("Description", "\\Your\Path\Here\$BackupDate"),
   ("Description", "\\Your\Path\Here\$BackupDate"))
 
-# Discord
-$DiscordTitle = "Monthly Backups"
-
-$Logfile = "C:\Your\Path\Here"
-$LogfileAppend = "C:\Your\Path\Here"
-$EmailFrom = "no-reply@injabie3.tk"
-$EmailTo = "destination@example.com"
-
 # VMs
 $VMsOn = "VM-Name1","VM Name2"
 $VMsOff = $VMsOn,"VM-Name3"
 
+# Discord
+$DiscordTitle = "Monthly Backups"
+
+# Email Settings
 $ComputerName = (Get-CIMInstance CIM_ComputerSystem).Name
 $EmailSubject = "${ComputerName} - Hyper-V Backup Log: $BackupDate"
+$EmailFrom = "no-reply@injabie3.tk"
+$EmailTo = "destination@example.com"
 $Username = "no-reply@injabie3.tk"
 $Password = "your-password-here"
+
+# Log files
+$Logfile = "C:\Your\Path\Here"
+$LogfileAppend = "C:\Your\Path\Here"
