@@ -41,10 +41,10 @@ Discord-PostWebhook "$($DiscordTitle)" `
     ":information_source: Kanbi is currently offline. Starting backups..."
 
 # Back up to main destination first.
-Robocopy $SourceFolder $DestinationMain /E /ZB /R:10 /W:30 /LOG:$Logfile /TEE /NP
+Robocopy $SourceFolder $DestinationMain[1] /E /ZB /R:10 /W:30 /LOG:$Logfile /TEE /NP
 
 Discord-PostWebhook "$($DiscordTitle)" `
-    ":information_source: Phase 1 of backups complete (RAID)."
+    ":information_source: Phase 1 complete, restarting VMs..."
 Discord-PostWebhook-SFUAni "$($DiscordTitle)" `
     ":information_source: Backups have completed. Ren should restart momentarily..."
 Discord-PostWebhook-VANime "$($DiscordTitle)" `
@@ -63,7 +63,7 @@ foreach( $dest in $DestinationsLocal ) {
     Add-Content $Logfile "Backing up to $($dest[0])`r`n"
     Discord-PostWebhook "$($DiscordTitle)" `
         ":information_source: Backing up to $($dest[0])..."
-    Robocopy $DestinationMain $dest[1] /E /ZB /R:10 /W:30 /LOG+:$Logfile /TEE /NP
+    Robocopy $DestinationMain[1] $dest[1] /E /ZB /R:10 /W:30 /LOG+:$Logfile /TEE /NP
 }
 
 # Remote Backups
@@ -73,7 +73,7 @@ foreach( $dest in $DestinationsRemote ) {
         ":information_source: Backing up to $($dest[0])..."
     # When backing up over the network, do not use z flag or else we take a long
     # time to back up over network.
-    Robocopy $DestinationMain $dest[1] /E /B /R:10 /W:30 /LOG+:$Logfile /TEE /NP
+    Robocopy $DestinationMain[1] $dest[1] /E /B /R:10 /W:30 /LOG+:$Logfile /TEE /NP
 }
 
 # Prep the email to be sent.
@@ -91,8 +91,7 @@ $SMTPClient = New-Object Net.Mail.SmtpClient("smtp.gmail.com", 587)
 $SMTPClient.EnableSsl = $true
 $SMTPClient.Credentials = New-Object `
     System.Net.NetworkCredential($Username, $Password);
-
-# Send E-mail to admin.
 $SMTPClient.Send($Message)
+
 Discord-PostWebhook "$($DiscordTitle)" `
     ":information_source: Backups are complete. The report was sent to `$($EmailTo)`."
