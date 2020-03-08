@@ -7,7 +7,7 @@
 # Modified by Injabie3 - https://injabie3.moe
 
 # Fetch settings
-.".\vhd-hyperv-settings.ps1"
+."$PSScriptRoot\vhd-hyperv-settings.ps1"
 
 
 # Include the Discord helpers
