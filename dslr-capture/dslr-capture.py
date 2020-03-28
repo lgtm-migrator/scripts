@@ -35,8 +35,23 @@ EMBED = \
 
 WEBHOOK = None # Insert Discord webhook here.
 
-def addBanner(frame, title, titlePoint=TITLE_POINT, fontScale=FONT_SCALE, thickness=THICKNESS):
-    """Add banner to image."""
+def addBanner(frame, title, titlePoint=TITLE_POINT, fontScale=FONT_SCALE,
+              thickness=THICKNESS):
+    """Add banner to image.
+
+    Parameters
+    ----------
+    frame
+        The OpenCV frame to add the banner to.
+    title: str
+        The title on the banner.
+    titlePoint: (int, int)
+        The location offset from the top right corner of the frame to
+        start writing to.
+    fontScale: float
+        The scaling of the font size.
+    thickness: int
+    """
     cv2.rectangle(frame,
                   (0, titlePoint[1]+10),
                   (frame.shape[1], 0),
@@ -44,8 +59,23 @@ def addBanner(frame, title, titlePoint=TITLE_POINT, fontScale=FONT_SCALE, thickn
     cv2.putText(frame, title, titlePoint,
                 FONT, fontScale, COLOUR, thickness)
 
-async def capture(logger: logging.Logger, cam: int, prefix: str, title: str="Camera", offset=None):
-    """Async loop to capture images from webcam using OpenCV"""
+async def capture(logger: logging.Logger, cam: int, prefix: str, title: str="Camera",
+                  offset=None):
+    """Async loop to capture images from webcam using OpenCV
+
+    Parameters
+    ----------
+    logger: logging.Logger
+        The logger object to keep track of when images are being captured.
+    cam: int
+        The webcam number to capture. If you only have one webcam, pass in 0.
+    prefix: str
+        Filename prefix for captured images.
+    title: str
+        The title to add to the top.
+
+    """
+
     if offset:
         await asyncio.sleep(offset)
     try:
