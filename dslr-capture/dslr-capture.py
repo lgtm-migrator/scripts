@@ -97,17 +97,22 @@ async def capture(logger: logging.Logger, cam: int, prefix: str, title: str="Cam
                 currTime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
                 timestampText = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 titleText = "{} - {}".format(title, timestampText)
-                addBanner(frame, titleText, titlePoint=(5, 40), fontScale=1.5, thickness=4)
+                addBanner(frame, titleText, titlePoint=(5, 40), fontScale=1.5,
+                          thickness=4)
                 logger.info("Saving image on camera %s", cam)
-                cv2.imwrite(filename="webcam-{}/camera-{}.jpg".format(prefix, currTime), img=frame)
+                cv2.imwrite(filename="webcam-{}/camera-{}.jpg".format(prefix,
+                                                                      currTime),
+                            img=frame)
                 good += 1
             else:
-                logger.error("Could not save image on cam %s! Code: %s", cam, success)
+                logger.error("Could not save image on cam %s! Code: %s", cam,
+                             success)
                 bad += 1
             total += 1
             await asyncio.sleep(15)
     finally:
-        logger.info("Cam %s - Good: %s | Bad: %s | Total: %s", prefix, good, bad, total)
+        logger.info("Cam %s - Good: %s | Bad: %s | Total: %s", prefix,
+                    good, bad, total)
 
 async def dslr(logger: logging.Logger):
     """DSLR Capture."""
@@ -169,8 +174,6 @@ async def dslr(logger: logging.Logger):
         except:
             logger.error("Could not capture probably, no focus", exc_info=True)
         await asyncio.sleep(15)
-
-
 
 def setupLogger():
     """Set up logger"""
