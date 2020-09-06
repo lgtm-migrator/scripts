@@ -91,10 +91,11 @@ class DeresuteData():
             The file path in which you want to save this graph.
         """
         self.logger.info("Saving graph of key %s to %s", key, outFile)
-        plt.figure(figsize=(20, 10))
+        plt.figure(figsize=(12, 6))
+        plt.title("{} Over Time".format(ylabel), fontsize=20)
         plt.grid(b=True, which="both")
-        plt.plot_date(self.data[KEY_TIMESTAMP], self.data[key], ".", markersize=1)
-        plt.xlabel("Date")
-        plt.ylabel(ylabel)
+        plt.plot_date(self.data[KEY_TIMESTAMP], self.data[key], ".", markersize=0.2)
+        plt.xlabel("Date", fontsize=14)
+        plt.ylabel(ylabel, fontsize=14)
         plt.gcf().autofmt_xdate()
         plt.savefig(outFile, dpi=300, figsize=(100, 10))
