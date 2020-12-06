@@ -14,6 +14,7 @@ import requests
 import subprocess
 import sys
 import cv2
+from PIL import Image, ImageDraw, ImageFont
 
 FONT = cv2.FONT_HERSHEY_SIMPLEX
 FONT_SCALE = 0.6
@@ -97,7 +98,6 @@ async def dslr(logger: logging.Logger):
         logger.info("batteryStatus: %s", batteryStatus)
 
         try:
-            image = cv2.imread(filename)
             timestampText = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             if str(batteryStatus) == "25\n" and not sentAlert25:
                 EMBED["embeds"][0]["description"] = (":warning: The DSLR battery is running "
@@ -117,9 +117,15 @@ async def dslr(logger: logging.Logger):
             elif batteryStatus == "50" or batteryStatus == "100":
                 sentAlert25 = False
                 sentAlertLow = False
-            titleText = "{} - {}".format("DSLR", timestampText)
+            with Image.open(filename) as image:
+                width, height = image.size
+                draw = ImageDraw.Draw(image)
+                font = ImageFont.truetype("Roboto-Regular.ttf", size=100)
+                titleText = "{} - {}".format("DSLR", timestampText)
+                draw.rectangle(((0,0), (width, 105)), fill=0)
+                draw.text((0,0), titleText, font=font)
+                image.save("webcam-cam1/camera-{}.jpg".format(currTime), "JPEG")
 
-            addBanner(image, titleText, titlePoint=(5, 65), fontScale=2.5, thickness=6)
             # transcol=cv2.cvtColor(image, cv2.COLOR_BGR2YCR_CB)
             # SSV=2
             # SSH=2
@@ -129,7 +135,6 @@ async def dslr(logger: logging.Logger):
             # cbsub=cbf[::SSV,::SSH]
             # imSub=[transcol[:,:,0],crsub,cbsub]
             # imSub=np.array(imSub)
-            cv2.imwrite(filename="webcam-cam1/camera-{}.jpg".format(currTime), img=image)
             logger.info("Saving image on DSLR")
         except:
             logger.error("Could not capture probably, no focus", exc_info=True)
