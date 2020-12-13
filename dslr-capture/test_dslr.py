@@ -13,21 +13,23 @@ class TestDslr(unittest.TestCase):
     def testFetchBatteryStatusThatIsUnableToFetch(self):
         subRun = MagicMock(subprocess.run)
         subRun.return_value = subprocess.CompletedProcess(["test"], -1)
-        assert self.dslr.batteryStatus == None, "Failed sanity check"
+        self.assertIsNone(self.dslr.batteryStatus, "Failed sanity check")
         with patch("dslr.subprocess.run", subRun):
             self.dslr.fetchBatteryStatus()
-            assert self.dslr.batteryStatus == -1, "We should have set battery status to -1!"
+            self.assertEqual(self.dslr.batteryStatus, -1,
+                             "We should have set battery status to -1!")
 
     def testFetchBatteryStatusPercentages(self):
         text = "Label: Battery Level\nReadonly: 0\nType: TEXT\nCurrent: {}%"
-        assert self.dslr.batteryStatus == None, "Failed sanity check"
+        self.assertIsNone(self.dslr.batteryStatus, "Failed sanity check")
         for level in [ "100", "75", "50", "25", "Low" ]:
             subRun = MagicMock(subprocess.run)
             subRun.return_value = subprocess.CompletedProcess(["test"], returncode=0,
                                                               stdout=text.format(level))
             with patch("dslr.subprocess.run", subRun):
                 self.dslr.fetchBatteryStatus()
-                assert self.dslr.batteryStatus == level, f"Battery level doesn't match {level}"
+                self.assertEqual(self.dslr.batteryStatus, level,
+                                 f"Battery level doesn't match {level}")
 
     def testMaybeSendAlertWithNoWebhook(self):
         with patch("dslr.requests.post") as request:
