@@ -21,7 +21,7 @@ class TestDslr(unittest.TestCase):
     def testFetchBatteryStatusPercentages(self):
         text = "Label: Battery Level\nReadonly: 0\nType: TEXT\nCurrent: {}%"
         assert self.dslr.batteryStatus == None, "Failed sanity check"
-        for level in [ 100, 75, 50, 25, 0 ]:
+        for level in [ "100", "75", "50", "25", "Low" ]:
             subRun = MagicMock(subprocess.run)
             subRun.return_value = subprocess.CompletedProcess(["test"], returncode=0,
                                                               stdout=text.format(level))

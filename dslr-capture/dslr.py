@@ -35,6 +35,6 @@ class DSLR(object):
             self.logger.error("Could not fetch battery status!")
             self.batteryStatus = -1
             return
-        level = search(r"(?:Current: )(\d+)(?:%)", batteryStatus.stdout).group(1)
-        self.batteryStatus = int(level)
+        level = search(r"(?:Current: )(\d+|Low)(?:%)?", batteryStatus.stdout).group(1)
+        self.batteryStatus = level
         self.logger.info("DSLR battery status: %s", batteryStatus)
