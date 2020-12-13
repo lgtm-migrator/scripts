@@ -90,6 +90,19 @@ class TestDslr(unittest.TestCase):
             self.assertFalse(self.dslr.sentAlert25, "Flag not reset after recovering!")
             self.assertFalse(self.dslr.sentAlertLow, "Flag not reset after recovering!")
 
+    def testFetchImageFail(self):
+        subRun = MagicMock(subprocess.run)
+        subRun.return_value = subprocess.CompletedProcess(["test"], returncode=1)
+        with patch("dslr.subprocess.run", subRun):
+            self.assertFalse(self.dslr.fetchImage())
+
+
+    def testFetchImageSuccess(self):
+        subRun = MagicMock(subprocess.run)
+        subRun.return_value = subprocess.CompletedProcess(["test"], returncode=0)
+        with patch("dslr.subprocess.run", subRun):
+            self.assertTrue(self.dslr.fetchImage())
+
 if __name__ == '__main__':
     unittest.main()
 

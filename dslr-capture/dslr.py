@@ -64,3 +64,11 @@ class DSLR(object):
         elif self.batteryStatus == "50" or self.batteryStatus == "100":
             self.sentAlert25 = False
             self.sentAlertLow = False
+
+    def fetchImage(self):
+        """Save an image from the DSLR camera"""
+        currTime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        filename = "dslr/cam-{}.jpg".format(currTime)
+        status = subprocess.run(["gphoto2", "--capture-image-and-download",
+                                "--filename={}".format(filename)])
+        return status.returncode == 0
