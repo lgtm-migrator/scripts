@@ -7,6 +7,7 @@
 # 
 from copy import deepcopy
 from datetime import datetime
+import json
 import logging
 from re import search
 import subprocess
@@ -38,3 +39,28 @@ class DSLR(object):
         level = search(r"(?:Current: )(\d+|Low)(?:%)?", batteryStatus.stdout).group(1)
         self.batteryStatus = level
         self.logger.info("DSLR battery status: %s", batteryStatus)
+
+    def maybeSendAlert(self):
+        if not self.webhook:
+            return
+        timestampText = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        if not self.batteryStatus in [ "100", "75", "50", "25", "Low" ]:
+            raise ValueError("Invalid batteryStatus!")
+        elif self.batteryStatus == "25" and not self.sentAlert25:
+            self.embed["embeds"][0]["description"] = (":warning: The DSLR battery is running "
+                                                      "low, at 25%!")
+            self.embed["embeds"][0]["footer"]["text"] = "Autocapture | {}".format(timestampText)
+            requests.post(self.webhook, data=json.dumps(self.embed),
+                          headers={'Content-Type': 'application/json'})
+            self.sentAlert25 = True
+        elif self.batteryStatus == "Low" and not self.sentAlertLow:
+            self.embed["embeds"][0]["description"] = (":warning: The DSLR battery is extremely "
+                                                      "low!! Please replace the battery "
+                                                      "immediately!")
+            self.embed["embeds"][0]["footer"]["text"] = "Autocapture | {}".format(timestampText)
+            requests.post(self.webhook, data=json.dumps(self.embed),
+                          headers={'Content-Type': 'application/json'})
+            self.sentAlertLow = True
+        elif self.batteryStatus == "50" or self.batteryStatus == "100":
+            self.sentAlert25 = False
+            self.sentAlertLow = False
