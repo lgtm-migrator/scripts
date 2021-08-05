@@ -42,7 +42,15 @@ Discord-PostWebhook "$($DiscordTitle)" `
     ":information_source: Phase 1 complete, restarting VMs..."
 Discord-PostWebhook-SFUAni "$($DiscordTitle)" `
     ":information_source: Backups have completed. Ren should restart momentarily..."
-Add-Content $Logfile "`r`nBackup Phase 1 completed, starting up VMs...`r`n"
+Add-Content $Logfile "`r`nBackup Phase 1 completed.`r`n"
+
+if($RestartWID) {
+    echo "Restarting Windows Internal Database to free up memory..."
+    Add-Content $Logfile "Restarting Windows Internal Database to free up memory...`r`n"
+    Restart-Service -DisplayName "Windows Internal Database"
+}
+
+Add-Content $Logfile "Starting up virtual machines...`r`n"
 
 # Start up the Virtual Machines again, but stagger the startup times.
 foreach($vm in $VMsOn) {

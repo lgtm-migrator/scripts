@@ -23,6 +23,13 @@ $DestinationsRemote =
 $VMsOn = @("VM-Name1","VM Name2")
 $VMsOff = $VMsOn + @("VM-Name3")
 
+# Windows Server Update Services (WSUS) with Windows Internal Database (WID)
+# If you are running WSUS using WID on Windows Server 2012, WID seems to eat
+# up memory over time and can cause VMs that were on before to not restart due
+# to insuffient RAM. As such, set the following value to True to restart WID
+# prior to restarting the VMs to alleviate the issue.
+$RestartWID = $false
+
 # Discord
 $DiscordTitle = "Monthly Backups"
 
