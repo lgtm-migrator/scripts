@@ -20,8 +20,8 @@ $DestinationsRemote =
 @(,("Description", "\\Your\Path\Here\$BackupDate"))
 
 # VMs
-$VMsOn = "VM-Name1","VM Name2"
-$VMsOff = $VMsOn,"VM-Name3"
+$VMsOn = @("VM-Name1","VM Name2")
+$VMsOff = $VMsOn + @("VM-Name3")
 
 # Discord
 $DiscordTitle = "Monthly Backups"
