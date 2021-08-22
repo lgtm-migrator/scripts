@@ -1,0 +1,17 @@
+# 2021-08-21
+# Injabie3
+#
+# Description:
+# PowerShell OpenVPN .ovpn profile generator settings file
+
+$template = "template.ovpn"
+
+# Common files shared across all clients
+$commonTaFile = "ta.key"
+$commonCAFile = "ca.crt"
+
+# Adjust server settings
+$serverAddress = "MyPublicallyAccessibleHostnameOrIpHere"
+$serverPort = 1234
+
+$outputFile = $clientName + ".ovpn"
