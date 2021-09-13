@@ -1,0 +1,7 @@
+﻿# Email Settings
+$ComputerName = (Get-CIMInstance CIM_ComputerSystem).Name
+$EmailSubject = "${ComputerName}: New OpenVPN connection from $Env:common_name"
+$EmailFrom = "source@injabie3.tk"
+$EmailTo = "destination@example.com"
+$Username = "source@injabie3.tk"
+$Password = "your-password-here"
