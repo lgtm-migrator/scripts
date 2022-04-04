@@ -1,4 +1,4 @@
-#!/usr/bin/env python4
+#!/usr/bin/env python3
 # 2019-07-09
 # Injabie3
 #
