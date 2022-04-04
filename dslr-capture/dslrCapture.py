@@ -178,7 +178,7 @@ async def dslr(logger: logging.Logger):
 def setupLogger():
     """Set up logger"""
     logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
     handler = logging.StreamHandler(sys.stdout)
     formatting = logging.Formatter("%(asctime)s %(levelname)s %(module)s "
                                    "%(funcName)s %(lineno)d: %(message)s",

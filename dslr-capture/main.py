@@ -7,17 +7,33 @@
 # 
 
 from dslrCapture import *
+from webcam import Webcam
+
+async def webcamCapture(logger):
+    cameraName = "Test"
+    webcam = Webcam(logger, 0, cameraName=cameraName,
+                    path="/home/pi/git/scripts/dslr-capture/")
+    try:
+        while True:
+            webcam.fetchAndSave()
+            await asyncio.sleep(15)
+    finally:
+        ctrs = webcam.counters
+        logger.info("Cam %s - Good: %s | Bad: %s | Total: %s", cameraName,
+                    ctrs.good, ctrs.bad, ctrs.total)
+
+
 
 if __name__ == "__main__":
     timestampText = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    EMBED["embeds"][0]["description"] = (":information_source: The DSLR autocapture script "
-                                         "has started.")
-    EMBED["embeds"][0]["footer"]["text"] = "Autocapture | {}".format(timestampText)
-    requests.post(WEBHOOK, data=json.dumps(EMBED),
-                  headers={'Content-Type': 'application/json'})
+    #EMBED["embeds"][0]["description"] = (":information_source: The DSLR autocapture script "
+    #                                     "has started.")
+    #EMBED["embeds"][0]["footer"]["text"] = "Autocapture | {}".format(timestampText)
+    #requests.post(WEBHOOK, data=json.dumps(EMBED),
+    #              headers={'Content-Type': 'application/json'})
     logger = setupLogger()
     loop = asyncio.get_event_loop()
     #loop.create_task(capture(logger, 0, "cam1", title="Camera 1"))
-    loop.create_task(capture(logger, 0, "cam2", title="Camera 2", offset=5))
-    loop.create_task(dslr(logger))
+    loop.create_task(webcamCapture(logger))
+    #loop.create_task(dslr(logger))
     loop.run_forever()
