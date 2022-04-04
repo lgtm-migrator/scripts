@@ -86,7 +86,7 @@ Add-Content $LogfileAppend $LogfileContents
 
 # Send E-mail message with log file attachment
 $Message = New-Object `
-    Net.Mail.MailMessage($EmailFrom, $EmailTo1, $EmailSubject, $EmailBodyComplete)
+    Net.Mail.MailMessage($EmailFrom, $EmailTo, $EmailSubject, $EmailBodyComplete)
 $Message.IsBodyHtml = $true
 $SMTPClient = New-Object Net.Mail.SmtpClient("smtp.gmail.com", 587)
 $SMTPClient.EnableSsl = $true
