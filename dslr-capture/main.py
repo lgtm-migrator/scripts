@@ -6,7 +6,7 @@
 # Autocapture script for DSLR cameras. Used for SFU Anime stuff.
 # 
 
-from dslr-capture import *
+from dslrCapture import *
 
 if __name__ == "__main__":
     timestampText = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
