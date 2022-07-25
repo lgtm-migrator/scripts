@@ -24,5 +24,6 @@ Function Discord-PostWebhook ($title, $message)
     $text = $bodyMessage.embeds[0].footer[0].text
     $bodyMessage.embeds[0].footer[0].text = "$text | $time"
     # Send payload
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     return Invoke-WebRequest -UseBasicParsing $webhook -ContentType "application/json" -Method POST -Body ($bodyMessage | ConvertTo-Json -Depth 4) -Verbose
 }
