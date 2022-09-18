@@ -10,13 +10,13 @@ from dslrCapture import *
 from webcam import Webcam
 
 async def webcamCapture(logger):
-    cameraName = "Test"
+    cameraName = "Summer Festival"
     webcam = Webcam(logger, 0, cameraName=cameraName,
-                    path="/home/pi/git/scripts/dslr-capture/")
+                    path="/home/pi/git/scripts/dslr-capture/webcam-usb/")
     try:
         while True:
             webcam.fetchAndSave()
-            await asyncio.sleep(15)
+            await asyncio.sleep(5)
     finally:
         ctrs = webcam.counters
         logger.info("Cam %s - Good: %s | Bad: %s | Total: %s", cameraName,

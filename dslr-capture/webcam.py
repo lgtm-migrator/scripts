@@ -4,11 +4,14 @@
 from copy import deepcopy
 from datetime import datetime
 import logging
+import os
 
 import cv2
 
 import constants
 from imagecounter import ImageCounter
+import requests
+import subprocess
 
 FONT = cv2.FONT_HERSHEY_SIMPLEX
 FONT_SCALE = 0.6
@@ -20,6 +23,7 @@ class Webcam:
     _titlePoint = (5, 40)
     _fontScale = 1.5
     _thickness = 4
+    lastFilename = None
     def __init__(
             self,
             logger: logging.Logger,
@@ -92,13 +96,34 @@ class Webcam:
         self.logger.info("Saving image on camera %s", self.cameraName)
         # TODO Use pathlib or something here
         filenameTs = self._imageTimestamp.strftime("%Y-%m-%d_%H-%M-%S")
-        filename = self.path + "camera-{}.jpg".format(filenameTs)
-        cv2.imwrite(filename=filename, img=self._imageFrame)
+        self.lastFilename = self.path + "camera-{}.jpg".format(filenameTs)
+        cv2.imwrite(filename=self.lastFilename, img=self._imageFrame)
+
+    def sendToApi(self):
+        # process = subprocess.Popen(["cloudflared", "access", "curl",
+        #                            "https://sfu-apuri.injabie3.moe/cam/summerfest",
+        #                            "--form", "image=@{}".format(self.lastFilename)],
+        #                             stdout=subprocess.PIPE)
+        try:
+            process = subprocess.Popen(["cloudflared", "access", "token",
+                                        "-app", "https://sfu-apuri.injabie3.moe"],
+                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            token, _ = process.communicate()
+            token = token.decode()
+            headers = { "cf-access-token": token }
+            with open(self.lastFilename, "rb") as imageFile:
+                files = { "image": imageFile }
+                requests.post("https://sfu-apuri.injabie3.moe/cam/summerfest",
+                             files=files, headers=headers)
+            self.logger.info("Uploaded to API")
+        except:
+            self.logger.error("Could not upload to API!", exc_info=True)
 
     def fetchAndSave(self):
         if self.capture():
             self.addBanner()
             self.saveImageToDisk()
+            self.sendToApi()
             return True
         return False
 
