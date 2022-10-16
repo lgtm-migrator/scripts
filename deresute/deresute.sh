@@ -14,20 +14,20 @@ scriptPath="$HOME/scripts/deresute"
 source $scriptPath/deresute-config.sh
 
 # Full download of images and JSON
-[ ! -d $DATA_PATH ] && mkdir $DATA_PATH
+[ ! -d $LOCAL_DATA_PATH ] && mkdir $LOCAL_DATA_PATH
 for id in ${!DERESUTE_PROFILE[@]}
 do
-    [ ! -d $DATA_PATH/$id ] && mkdir $DATA_PATH/$id
-    wget -O "$DATA_PATH/$id/$id-$currentDate.png" https://deresute.me/$id/huge
+    [ ! -d $LOCAL_DATA_PATH/$id ] && mkdir $LOCAL_DATA_PATH/$id
+    wget -O "$LOCAL_DATA_PATH/$id/$id-$currentDate.png" https://deresute.me/$id/huge
 done
 
 # These downloads will have IDs hidden, and images published on the www
 for privateId in ${DERESUTE_PROFILE[@]}
 do
-    [ ! -d $DATA_PATH/$privateId ] && mkdir $DATA_PATH/$privateId
-    wget -O "$DATA_PATH/$privateId/$privateId-$currentDate.png" https://deresute.me/$privateId/huge
+    [ ! -d $LOCAL_DATA_PATH/$privateId ] && mkdir $LOCAL_DATA_PATH/$privateId
+    wget -O "$LOCAL_DATA_PATH/$privateId/$privateId-$currentDate.png" https://deresute.me/$privateId/huge
     [ ! -d $PUB_PATH ] && mkdir $PUB_PATH
     [ ! -d $PUB_PATH/$privateId ] && mkdir $PUB_PATH/$privateId
-    cp "$DATA_PATH/$privateId/$privateId-$currentDate.png" $PUB_PATH/$privateId/
+    cp "$LOCAL_DATA_PATH/$privateId/$privateId-$currentDate.png" $PUB_PATH/$privateId/
 done
 

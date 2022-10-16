@@ -8,6 +8,7 @@
 # Script config file.
 # 
 DATA_PATH="/path/to/data"
+LOCAL_DATA_PATH="/path/to/local-data"
 PUB_PATH="/path/to/public/storage"
 
 declare -A DERESUTE_PROFILE
