@@ -14,10 +14,10 @@ scriptPath="$HOME/scripts/deresute"
 source $scriptPath/deresute-config.sh
 
 # Full download of images and JSON
-[ ! -d $DATA_PATH ] && mkdir $DATA_PATH
+[ ! -d $LOCAL_DATA_PATH ] && mkdir $LOCAL_DATA_PATH
 for dl in ${!DERESUTE_PROFILE[@]}
 do
-    [ ! -d $DATA_PATH/$dl ] && mkdir $DATA_PATH/$dl
-    [ ! -d $DATA_PATH/$dl/json ] && mkdir $DATA_PATH/$dl/json
-    wget -O "$DATA_PATH/$dl/json/$dl-$currentDate.json" https://deresute.me/$dl/json
+    [ ! -d $LOCAL_DATA_PATH/$dl ] && mkdir $LOCAL_DATA_PATH/$dl
+    [ ! -d $LOCAL_DATA_PATH/$dl/json ] && mkdir $LOCAL_DATA_PATH/$dl/json
+    wget -O "$LOCAL_DATA_PATH/$dl/json/$dl-$currentDate.json" https://deresute.me/$dl/json
 done
