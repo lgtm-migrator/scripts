@@ -22,6 +22,7 @@ if [[ -z "${SHUTDOWN_ENDPOINT}" ]]; then
 	exit 1
 elif [[ -z "${CANCEL_ENDPOINT}" ]]; then
 	echo "Missing CANCEL_ENDPOINT variable, please ensure it's set!"
+    exit 1
 fi
 
 
