@@ -5,6 +5,11 @@ Windows-based deployment:
 - [client-connect Email Notifier](#client-connect-email-notifier)
 
 ## Profile Generator
+This section refers to the following files:
+- `generate-ovpn.ps1`
+- `generate-ovpn-settings.ps1*`
+- `template.ovpn`
+
 This script allows you to quickly generate the .ovpn profiles needed to connect to
 your own OpenVPN server. It stitches together the following files using common
 configuration stored in a templated ovpn file:
@@ -31,6 +36,10 @@ Feel free to adjust as you see fit.
 6. Connect to your VPN as need be.
 
 ## client-connect Email Notifier
+This section refers to the following files:
+- `login-email.ps1`
+- `login-email-settings.ps1*`
+
 This script sends an Email notification to a specified email address when a user
 successfully connects to your OpenVPN server.
 
