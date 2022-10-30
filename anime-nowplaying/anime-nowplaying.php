@@ -29,6 +29,7 @@ $code = $_GET['code'];
 $animeID = "";
 $ep = 0;
 $eptotal = 0;
+$season = 0;
 $name = "";
 $picurl = "";
 $user = "";
@@ -44,6 +45,7 @@ if ($isPlex) {
     $ep = $data->Metadata->index;
     $eptotal = 0;
     $isVideo = in_array($data->Metadata->type, [ "movie", "episode" ]);
+    $season = $data->Metadata->parentIndex;
     $name = $data->Metadata->grandparentTitle;
     $picurl = "N/A";
     $user = $data->Account->title;
@@ -65,16 +67,16 @@ if ($isPlex) {
 
 $sqlTest  = <<<SQL
 INSERT INTO $TABLE_NAME
-(`ID`, `timestamp`, `user`, `animeID`, `name` ,`ep` ,`eptotal`,`picurl`)
+(`ID`, `timestamp`, `user`, `animeID`, `name`, `season`, `ep`, `eptotal`, `picurl`)
 VALUES
-(NULL, CURRENT_TIMESTAMP, 'Test', '0', 'Database Test', '0', '0', '');
+(NULL, CURRENT_TIMESTAMP, 'Test', '0', 'Database Test', 0, '0', '0', '');
 SQL;
 
 $sqlInsert = <<<SQL
 INSERT INTO $TABLE_NAME
-(`ID`, `timestamp`, `user`, `animeID`, `name` ,`ep` ,`eptotal`,`picurl`)
+(`ID`, `timestamp`, `user`, `animeID`, `name`, `season`, `ep`, `eptotal`, `picurl`)
 VALUES
-(NULL, CURRENT_TIMESTAMP, '$user', '$animeID', '$name', '$ep', '$eptotal', '$picurl');
+(NULL, CURRENT_TIMESTAMP, '$user', '$animeID', '$name', '$season', '$ep', '$eptotal', '$picurl');
 SQL;
 
 $sqlGetData = <<<SQL
