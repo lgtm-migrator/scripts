@@ -18,10 +18,10 @@ POLLING_INTERVAL=30
 source envvar.sh
 
 if [[ -z "${SHUTDOWN_ENDPOINT}" ]]; then
-	echo "Missing SHUTDOWN_ENDPOINT variable, please ensure it's set!"
-	exit 1
+    echo "Missing SHUTDOWN_ENDPOINT variable, please ensure it's set!"
+    exit 1
 elif [[ -z "${CANCEL_ENDPOINT}" ]]; then
-	echo "Missing CANCEL_ENDPOINT variable, please ensure it's set!"
+    echo "Missing CANCEL_ENDPOINT variable, please ensure it's set!"
     exit 1
 fi
 
@@ -31,26 +31,26 @@ onBattery=0
 triggeredShutdown=0
 
 while true; do
-	sleep $POLLING_INTERVAL
-	charge=`upsc ups@localhost battery.charge 2> /dev/null`
-	status=`upsc ups@localhost ups.status 2> /dev/null`
-	echo Battery at ${charge}%
+    sleep $POLLING_INTERVAL
+    charge=`upsc ups@localhost battery.charge 2> /dev/null`
+    status=`upsc ups@localhost ups.status 2> /dev/null`
+    echo Battery at ${charge}%
 
-	if [[ $status -eq "OL" ]]; then
-		echo "AC online"
-		if [[ $triggeredShutdown -eq 1 ]]; then
-			echo "Attempting to cancel shutdown"
+    if [[ $status -eq "OL" ]]; then
+        echo "AC online"
+        if [[ $triggeredShutdown -eq 1 ]]; then
+            echo "Attempting to cancel shutdown"
             wget ${CANCEL_ENDPOINT}
-			triggeredShutdown=0
-		fi
-	else
-		echo "AC offline!"
-		if [[ ( $charge -le $BATTERY_THRESHOLD ) && ( $triggeredShutdown -eq 0 ) ]]; then
-			echo "Triggering remote shutdown"
-			wget ${SHUTDOWN_ENDPOINT}
-			triggeredShutdown=1
-		fi
-	fi
+            triggeredShutdown=0
+        fi
+    else
+        echo "AC offline!"
+        if [[ ( $charge -le $BATTERY_THRESHOLD ) && ( $triggeredShutdown -eq 0 ) ]]; then
+            echo "Triggering remote shutdown"
+            wget ${SHUTDOWN_ENDPOINT}
+            triggeredShutdown=1
+        fi
+    fi
 
 done
 
